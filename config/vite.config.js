@@ -13,7 +13,7 @@ export default defineConfig({
     server: {
         port: 3000,
     },
-    base: process.env.UPTIME_KUMA_BASE_PATH ? process.env.UPTIME_KUMA_BASE_PATH + "/" : "/",
+    base: "/",
     define: {
         FRONTEND_VERSION: JSON.stringify(process.env.npm_package_version),
         "process.env": {},

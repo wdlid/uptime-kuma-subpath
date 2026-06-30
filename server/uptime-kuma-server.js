@@ -101,6 +101,13 @@ class UptimeKumaServer {
 
         try {
             this.indexHTML = fs.readFileSync("./dist/index.html").toString();
+            const basePath = process.env.UPTIME_KUMA_BASE_PATH || "";
+            if (basePath) {
+                this.indexHTML = this.indexHTML.replace(
+                    "<head>",
+                    `<head>\n    <meta name="base-path" content="${basePath}">`
+                );
+            }
         } catch (e) {
             // "dist/index.html" is not necessary for development
             if (process.env.NODE_ENV !== "development") {

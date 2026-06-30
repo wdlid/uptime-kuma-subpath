@@ -118,7 +118,7 @@ export default {
             }
 
             socket = io(url, {
-                path: (import.meta.env.BASE_URL || "/").replace(/\/$/, "") + "/socket.io/",
+                path: (document.querySelector('meta[name="base-path"]')?.getAttribute("content") || "") + "/socket.io/",
             });
 
             socket.on("info", (info) => {

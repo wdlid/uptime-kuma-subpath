@@ -191,8 +191,11 @@ const routes = [
     },
 ];
 
+const metaTag = document.querySelector('meta[name="base-path"]');
+const basePath = metaTag ? metaTag.getAttribute("content") : "" || "/";
+
 export const router = createRouter({
     linkActiveClass: "active",
-    history: createWebHistory(import.meta.env.BASE_URL),
+    history: createWebHistory(basePath),
     routes,
 });

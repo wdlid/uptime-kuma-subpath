@@ -47,7 +47,8 @@ app.mount("#app");
 // Service Worker
 // Mainly for Webpush notification
 if ("serviceWorker" in navigator) {
-    const basePath = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+    const metaTag = document.querySelector('meta[name="base-path"]');
+    const basePath = metaTag ? metaTag.getAttribute("content") : "";
     navigator.serviceWorker.register(basePath + "/serviceWorker.js", { scope: basePath + "/" }).catch((error) => {
         console.error("Service worker registration failed:", error);
     });

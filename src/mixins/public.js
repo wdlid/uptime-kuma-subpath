@@ -9,8 +9,9 @@ if (env === "development" && isDevContainer()) {
 } else if (env === "development" || localStorage.dev === "dev") {
     axios.defaults.baseURL = location.protocol + "//" + location.hostname + ":3001";
 } else {
-    // In production, use the base path so API calls go to /uptime/api/... instead of /api/...
-    const basePath = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+    // In production, read base path from meta tag (injected by server at runtime)
+    const metaTag = document.querySelector('meta[name="base-path"]');
+    const basePath = metaTag ? metaTag.getAttribute("content") : "";
     if (basePath) {
         axios.defaults.baseURL = basePath;
     }

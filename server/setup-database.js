@@ -150,14 +150,14 @@ class SetupDatabase {
                 response.redirect((basePath || "") + "/setup-database");
             });
 
-            app.get("/api/entry-page", async (request, response) => {
+            app.get(basePath + "/api/entry-page", async (request, response) => {
                 allowDevAllOrigin(response);
                 response.json({
                     type: "setup-database",
                 });
             });
 
-            app.get("/setup-database-info", (request, response) => {
+            app.get(basePath + "/setup-database-info", (request, response) => {
                 allowDevAllOrigin(response);
                 console.log("Request /setup-database-info");
                 response.json({
@@ -168,7 +168,7 @@ class SetupDatabase {
                 });
             });
 
-            app.post("/setup-database", async (request, response) => {
+            app.post(basePath + "/setup-database", async (request, response) => {
                 allowDevAllOrigin(response);
 
                 if (this.runningSetup) {

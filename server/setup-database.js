@@ -137,6 +137,7 @@ class SetupDatabase {
         return new Promise((resolve) => {
             const app = express();
             let tempServer;
+            const basePath = process.env.UPTIME_KUMA_BASE_PATH || "";
             app.use(express.json());
 
             // Disable Keep Alive, otherwise the server will not shutdown, as the client will keep the connection alive
@@ -146,7 +147,7 @@ class SetupDatabase {
             });
 
             app.get("/", async (request, response) => {
-                response.redirect("/setup-database");
+                response.redirect((basePath || "") + "/setup-database");
             });
 
             app.get("/api/entry-page", async (request, response) => {
@@ -293,7 +294,7 @@ class SetupDatabase {
             });
 
             app.use(
-                "/",
+                basePath + "/",
                 expressStaticGzip("dist", {
                     enableBrotli: true,
                 })

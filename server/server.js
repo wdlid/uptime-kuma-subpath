@@ -364,6 +364,7 @@ let needSetup = false;
         basePath + "/",
         expressStaticGzip("dist", {
             enableBrotli: true,
+            index: false,
         })
     );
 

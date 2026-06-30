@@ -297,6 +297,7 @@ class SetupDatabase {
                 basePath + "/",
                 expressStaticGzip("dist", {
                     enableBrotli: true,
+                    index: false,
                 })
             );
 

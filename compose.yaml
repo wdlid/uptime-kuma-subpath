@@ -1,9 +1,11 @@
 services:
   uptime-kuma:
-    image: louislam/uptime-kuma:2
+    image: wdlid/uptime-kuma-subpath:latest
     restart: unless-stopped
     volumes:
       - ./data:/app/data
     ports:
-      # <Host Port>:<Container Port>
       - "3001:3001"
+    environment:
+      # Set subpath if running behind a reverse proxy (e.g. /uptime/)
+      # UPTIME_KUMA_BASE_PATH: /uptime

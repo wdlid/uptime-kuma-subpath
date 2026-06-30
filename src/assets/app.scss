@@ -5,6 +5,7 @@
 #app {
     font-family:
         "Twemoji Country Flags",
+        "Fira Sans",
         BlinkMacSystemFont,
         segoe ui,
         Roboto,
@@ -16,6 +17,10 @@
         segoe ui emoji,
         segoe ui symbol,
         noto color emoji;
+}
+
+code, pre, .font-monospace {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 h1 {

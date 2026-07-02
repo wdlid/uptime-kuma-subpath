@@ -82,8 +82,19 @@ export function getResBaseURL() {
     } else if (env === "development" || localStorage.dev === "dev") {
         return location.protocol + "//" + location.hostname + ":3001";
     } else {
-        return "";
+        return getBasePath();
     }
+}
+
+/**
+ * Get the base path that the app is served under (e.g. "/uptime").
+ * Injected by the server at runtime via the <meta name="base-path"> tag.
+ * @returns {string} Base path, or empty string when served from root
+ */
+export function getBasePath() {
+    const metaTag = document.querySelector("meta[name=\"base-path\"]");
+    const path = metaTag ? metaTag.getAttribute("content") : "";
+    return path.endsWith("/") ? path.slice(0, -1) : path;
 }
 
 /**

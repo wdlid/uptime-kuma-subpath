@@ -20,7 +20,7 @@ import dayjs from "dayjs";
 import timezone from "./modules/dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { loadToastSettings } from "./util-frontend";
+import { loadToastSettings, getBasePath } from "./util-frontend";
 dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.extend(relativeTime);
@@ -34,6 +34,10 @@ const app = createApp({
     },
     render: () => h(App),
 });
+
+// Expose the base path (e.g. "/uptime") to all components as this.basePath
+// so that hardcoded absolute asset URLs resolve correctly under a subpath.
+app.config.globalProperties.basePath = getBasePath();
 
 app.use(router);
 app.use(i18n);

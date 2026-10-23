@@ -1,5 +1,11 @@
 ARG BASE_IMAGE=louislam/uptime-kuma:base2
 
+FROM $BASE_IMAGE AS base
+RUN rm -rf /usr/local/lib/node_modules /usr/local/include/node
+COPY --from=node:22-bookworm-slim /usr/local/bin /usr/local/bin
+COPY --from=node:22-bookworm-slim /usr/local/lib /usr/local/lib
+COPY --from=node:22-bookworm-slim /usr/local/include /usr/local/include
+
 ############################################
 # Build in Golang
 ############################################
@@ -8,7 +14,7 @@ FROM louislam/uptime-kuma:builder-go AS build_healthcheck
 ############################################
 # Build in Node.js
 ############################################
-FROM louislam/uptime-kuma:base2 AS build
+FROM base AS build
 USER node
 WORKDIR /app
 
@@ -26,7 +32,7 @@ RUN mkdir ./data
 ############################################
 # ⭐ Main Image
 ############################################
-FROM $BASE_IMAGE AS release
+FROM base AS release
 WORKDIR /app
 
 LABEL org.opencontainers.image.source="https://github.com/louislam/uptime-kuma"

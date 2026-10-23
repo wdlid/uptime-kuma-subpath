@@ -14,6 +14,16 @@ export default defineConfig({
         port: 3000,
     },
     base: "/",
+    experimental: {
+        renderBuiltUrl(filename, { hostType }) {
+            if (hostType === "js") {
+                return {
+                    runtime: `(document.querySelector('meta[name="base-path"]')?.getAttribute("content")?.replace(/\\/$/, "") || "") + "/${filename}"`,
+                };
+            }
+            return "/" + filename;
+        },
+    },
     define: {
         FRONTEND_VERSION: JSON.stringify(process.env.npm_package_version),
         "process.env": {},

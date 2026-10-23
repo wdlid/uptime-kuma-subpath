@@ -1,6 +1,9 @@
 name: Build and Push Docker Image
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
     inputs:
       tag:
@@ -51,5 +54,5 @@ jobs:
           push: true
           target: release
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/uptime-kuma-subpath:${{ github.event.inputs.tag }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/uptime-kuma-subpath:${{ github.event.inputs.tag || 'latest' }}
             ${{ secrets.DOCKERHUB_USERNAME }}/uptime-kuma-subpath:latest
